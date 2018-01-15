@@ -1,0 +1,15 @@
+(A) Call a buddy @Phone +Friend
+(A) Plan for the party +Party season:summer
+(B) Do more coding +Coding @Computer language:c# variant:core
+Replace an air filter @Home
+Pick up butter @GroceryStore
+x Make a cool program
+x (A) Test item A
+x (A) 2018-12-31 2018-01-01 Test item B
+(A) 2018-12-31 2018-01-01 Test item C
+2018-12-31 2018-01-01 Test item D
+x 2018-12-31 2018-01-01 Test item E
+2018-01-01 Test item F
+x 2018-01-01 Test item G
+
+
