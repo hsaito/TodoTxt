@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
@@ -28,6 +30,11 @@ namespace TodoTxtLib
 
     public static class TodoTxt
     {
+        /// <summary>
+        /// Parse a string line to the TodoItem
+        /// </summary>
+        /// <param name="line">String line</param>
+        /// <returns>TodoItem</returns>
         public static TodoItem Parse(string line)
         {
             var entry = new TodoItem();
@@ -103,6 +110,56 @@ namespace TodoTxtLib
             entry.Body = line;
             
             return entry;
+        }
+
+        /// <summary>
+        /// Generate output string from TodoItem
+        /// </summary>
+        /// <param name="item">TodoItem to process</param>
+        /// <returns>String representation of the TodoItem</returns>
+        public static string GenerateTodoLine(TodoItem item)
+        {
+            var output = "";
+
+            // Completion marker
+            if (item.Completed)
+            {
+                output += "x ";
+            }
+
+            // Creation
+            if (item.ModeMode == TodoMode.Completion)
+            {
+                output += item.Completion.Date.ToString("yyyy-MM-dd") + " ";
+                output += item.Creation.Date.ToString("yyyy-MM-dd") + " ";
+            }
+            else if (item.ModeMode == TodoMode.Creation)
+            {
+                output += item.Creation.Date.ToString("yyyy-MM-dd") + " ";
+            }
+            
+            // Body
+            {
+                output += item.Body + " ";
+            }
+            
+            // Context
+            {
+                foreach (var context in item.Context)
+                {
+                    output += "@" + context + " ";
+                }
+            }
+            
+            // Project
+            {
+                foreach (var project in item.Project)
+                {
+                    output += "+" + project + " ";
+                }
+            }
+            
+            return output.Trim();
         }
     }
 }

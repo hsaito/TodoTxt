@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoTxt", "TodoTxt\TodoTxt.csproj", "{553C1292-4397-4E3C-A6B1-36D2759F0969}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoTxtLib", "TodoTxtLib\TodoTxtLib.csproj", "{E8E9E293-5FF3-4295-9E30-2FD9391FB244}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoTxtTest", "TodoTxtTest\TodoTxtTest.csproj", "{456F6A42-C942-4F37-83C8-ED82E3B60853}"
@@ -12,10 +10,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{553C1292-4397-4E3C-A6B1-36D2759F0969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{553C1292-4397-4E3C-A6B1-36D2759F0969}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{553C1292-4397-4E3C-A6B1-36D2759F0969}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{553C1292-4397-4E3C-A6B1-36D2759F0969}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E8E9E293-5FF3-4295-9E30-2FD9391FB244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E8E9E293-5FF3-4295-9E30-2FD9391FB244}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8E9E293-5FF3-4295-9E30-2FD9391FB244}.Release|Any CPU.ActiveCfg = Release|Any CPU

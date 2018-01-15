@@ -11,7 +11,7 @@ namespace TodoTxtTest
     public class UnitTest1
     {
         [Fact]
-        public void ParsingTest()
+        public List<TodoItem> ParsingTest()
         {
             var reader = new StreamReader("todo.txt");
 
@@ -24,6 +24,21 @@ namespace TodoTxtTest
                 Console.WriteLine(result.Body);
                 todoList.Add(result);
             } while (!reader.EndOfStream);
+
+            return todoList;
+        }
+
+        [Fact]
+        public void OutputTest()
+        {
+            var list = ParsingTest();
+
+            var writer = new StreamWriter("todo_output.txt") {AutoFlush = true};
+
+            foreach (var item in list)
+            {
+                writer.WriteLine(TodoTxt.GenerateTodoLine(item));
+            }
         }
     }
 }
