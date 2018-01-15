@@ -5,6 +5,8 @@
     <Company>Hideki Saito</Company>
     <Product>TodoTxtLib</Product>
     <PackageId>TodoTxtLib</PackageId>
+    <PackageLicenseUrl>https://github.com/hsaito/TodoTxt/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/hsaito/TodoTxt/</PackageProjectUrl>
     <Description>todo.txt processor for .NET Standard</Description>
     <Copyright>Copyright (c) 2018 Hideki Saito</Copyright>
     <Version>1.0.0.0</Version>
