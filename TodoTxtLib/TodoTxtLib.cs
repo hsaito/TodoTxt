@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
-using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
 namespace TodoTxtLib
@@ -17,21 +13,21 @@ namespace TodoTxtLib
 
     public class TodoItem
     {
-        public bool Completed;
-        public char Priority;
-        public TodoMode ModeMode;
-        public DateTime Completion;
-        public DateTime Creation;
         public string Body;
+        public bool Completed;
+        public DateTime Completion;
         public List<string> Context = new List<string>();
-        public List<string> Project = new List<string>();
+        public DateTime Creation;
         public Dictionary<string, string> Meta = new Dictionary<string, string>();
+        public char Priority;
+        public List<string> Project = new List<string>();
+        public TodoMode TodoMode;
     }
 
     public static class TodoTxt
     {
         /// <summary>
-        /// Parse a string line to the TodoItem
+        ///     Parse a string line to the TodoItem
         /// </summary>
         /// <param name="line">String line</param>
         /// <returns>TodoItem</returns>
@@ -62,7 +58,7 @@ namespace TodoTxtLib
             if (Regex.IsMatch(line, "^(.{4}-.{2}-.{2}) (.{4}-.{2}-.{2}) (.*)$"))
             {
                 // Completion and Creation
-                entry.ModeMode = TodoMode.Completion;
+                entry.TodoMode = TodoMode.Completion;
                 var result = Regex.Matches(line, ".{4}-.{2}-.{2}");
 
                 entry.Completion = DateTime.Parse(result[0].ToString());
@@ -72,7 +68,7 @@ namespace TodoTxtLib
             else if (Regex.IsMatch(line, "^(.{4}-.{2}-.{2}) (.*)$"))
             {
                 // Creation only
-                entry.ModeMode = TodoMode.Creation;
+                entry.TodoMode = TodoMode.Creation;
                 var result = Regex.Matches(line, "^.{4}-.{2}-.{2}");
                 entry.Creation = DateTime.Parse(result[0].ToString());
                 line = Regex.Replace(line, "^.{4}-.{2}-.{2} (.*)$", "$1");
@@ -80,25 +76,22 @@ namespace TodoTxtLib
             else
             {
                 // Nothing
-                entry.ModeMode = TodoMode.None;
+                entry.TodoMode = TodoMode.None;
             }
 
             // Context
             foreach (var item in Regex.Matches(line, "@([^\\s]*)"))
-            {
                 entry.Context.Add(item.ToString().Replace("@", "").Trim());
-            }
 
             line = Regex.Replace(line, "@([^\\s]*)", "").Trim();
 
             // Project
             foreach (var item in Regex.Matches(line, "\\+([^\\s]*)"))
-            {
                 entry.Project.Add(item.ToString().Replace("+", "").Trim());
-            }
 
             line = Regex.Replace(line, "\\+([^\\s]*)", "").Trim();
 
+            // Meta
             foreach (var item in Regex.Matches(line, "([^\\s]*?)\\:([^\\s]*)"))
             {
                 var result = Regex.Match(item.ToString(), "([^\\s]*?)\\:([^\\s]*)");
@@ -108,12 +101,12 @@ namespace TodoTxtLib
             line = Regex.Replace(line, "([^\\s]*?)\\:([^\\s]*)", "").Trim();
 
             entry.Body = line;
-            
+
             return entry;
         }
 
         /// <summary>
-        /// Generate output string from TodoItem
+        ///     Generate output string from TodoItem
         /// </summary>
         /// <param name="item">TodoItem to process</param>
         /// <returns>String representation of the TodoItem</returns>
@@ -122,43 +115,33 @@ namespace TodoTxtLib
             var output = "";
 
             // Completion marker
-            if (item.Completed)
-            {
-                output += "x ";
-            }
+            if (item.Completed) output += "x ";
 
             // Creation
-            if (item.ModeMode == TodoMode.Completion)
+            if (item.TodoMode == TodoMode.Completion)
             {
                 output += item.Completion.Date.ToString("yyyy-MM-dd") + " ";
                 output += item.Creation.Date.ToString("yyyy-MM-dd") + " ";
             }
-            else if (item.ModeMode == TodoMode.Creation)
+            else if (item.TodoMode == TodoMode.Creation)
             {
                 output += item.Creation.Date.ToString("yyyy-MM-dd") + " ";
             }
-            
+
             // Body
             {
                 output += item.Body + " ";
             }
-            
+
             // Context
-            {
-                foreach (var context in item.Context)
-                {
-                    output += "@" + context + " ";
-                }
-            }
-            
+            foreach (var context in item.Context) output += "@" + context + " ";
+
             // Project
-            {
-                foreach (var project in item.Project)
-                {
-                    output += "+" + project + " ";
-                }
-            }
-            
+            foreach (var project in item.Project) output += "+" + project + " ";
+
+            // Meta
+            foreach (var meta in item.Meta) output += meta.Key + ":" + meta.Value + " ";
+
             return output.Trim();
         }
     }
