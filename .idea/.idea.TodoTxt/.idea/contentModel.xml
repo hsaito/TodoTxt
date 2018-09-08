@@ -30,7 +30,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Release" t="Include">
-            <e p="netcoreapp2.0" t="Include">
+            <e p="netcoreapp2.1" t="Include">
               <e p="TodoTxtTest.AssemblyInfo.cs" t="Include" />
               <e p="TodoTxtTest.Program.cs" t="Include" />
             </e>
