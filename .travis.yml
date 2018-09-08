@@ -1,0 +1,8 @@
+language: csharp
+solution: MyNumberNET.sln
+mono: none
+dotnet: 2.1.300
+script:
+ - dotnet restore
+ - dotnet build
+ - dotnet test TodoTxtTest
