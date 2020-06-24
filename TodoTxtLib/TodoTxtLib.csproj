@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Hideki Saito</Authors>
     <Company>Hideki Saito</Company>
     <Product>TodoTxtLib</Product>
@@ -8,9 +8,16 @@
     <PackageLicenseUrl>https://github.com/hsaito/TodoTxt/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/hsaito/TodoTxt/</PackageProjectUrl>
     <Description>todo.txt processor for .NET Standard</Description>
-    <Copyright>Copyright (c) 2018 Hideki Saito</Copyright>
-    <Version>1.0.2.0</Version>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
+    <Copyright>Copyright (c) 2019 Hideki Saito</Copyright>
+    <Version>1.1.0.0</Version>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Deterministic>true</Deterministic>
+    <DeterministicSourceRoot>/_/</DeterministicSourceRoot>
+    <RepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\'))</RepoRoot>
+    <PathMap>$(RepoRoot)=$(DeterministicSourceRoot)</PathMap>
   </PropertyGroup>
 </Project>
